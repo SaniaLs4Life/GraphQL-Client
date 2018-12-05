@@ -81,7 +81,7 @@ class AddBook extends Component {
         return (
             <span style={{margin: 'auto', textAlign: 'center', marginTop: '15px', display: 'inline-block'}}>
                 <h1>Actions</h1>
-                <Button type="primary" onClick={this.showModal}>
+                <Button type="primary" icon="plus" onClick={this.showModal}>
                 Add a book
                 </Button>
                 <Modal

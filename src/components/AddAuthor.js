@@ -64,7 +64,7 @@ class AddAuthor extends Component {
     render() {
         return (
             <span style={{margin: 'auto', textAlign: 'center', marginTop: '15px', display: 'inline-block', marginLeft: '15px'}}>
-                <Button type="primary" onClick={this.showModal}>
+                <Button type="primary" icon="user-add" onClick={this.showModal}>
                 Add an author
                 </Button>
                 <Modal
