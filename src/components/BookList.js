@@ -49,7 +49,7 @@ class BookList extends Component {
                                 <Skeleton loading={false} avatar active>
                                         <Meta
                                         avatar={<Avatar src="https://cdn4.iconfinder.com/data/icons/basic-17/80/22_BO_open_book-512.png" />}
-                                        title={book.name}
+                                        title={'Book: ' + book.name}
                                         description={book.author.name + ' ' + book.author.age} 
                                         />
                                 </Skeleton>
@@ -60,7 +60,6 @@ class BookList extends Component {
         }
     }
     render() {
-        console.log(this.props);
         return (
             <div>
                 <Row gutter={16}>

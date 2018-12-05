@@ -32,7 +32,6 @@ class BookDetails extends Component {
         }
     }
     render() {
-        console.log(this.props.bookId)
         return (
                 <Row gutter={16}>
                     {

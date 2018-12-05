@@ -25,17 +25,16 @@ class AddBook extends Component {
             name: '',
             genre: '',
             authorId: '',
-            visible: true       
+            visible: true,
+            error: false
         });
       }
     
-      handleOk = (e) => {
-        this.submitForm()
-        console.log(e);
+      handleOk = () => {
+        this.submitForm();
       }
     
-      handleCancel = (e) => {
-        console.log(e);
+      handleCancel = () => {
         this.setState({
             visible: false      
         });
@@ -55,7 +54,6 @@ class AddBook extends Component {
         }
     }
     submitForm() {
-        console.log(this.state);
         if(this.state.name && this.state.genre && this.state.authorId) {
             this.props.addBookMutation({
                 variables: {
@@ -68,7 +66,7 @@ class AddBook extends Component {
                         query: getBooksQuery
                     }
                 ]
-            });            
+            });   
             this.setState({
                 visible: false,
                 error: false   
@@ -81,7 +79,8 @@ class AddBook extends Component {
     }
     render() {
         return (
-            <div style={{margin: 'auto', textAlign: 'center', marginTop: '15px'}}>
+            <span style={{margin: 'auto', textAlign: 'center', marginTop: '15px', display: 'inline-block'}}>
+                <h1>Actions</h1>
                 <Button type="primary" onClick={this.showModal}>
                 Add a book
                 </Button>
@@ -91,24 +90,24 @@ class AddBook extends Component {
                 onOk={this.handleOk}
                 onCancel={this.handleCancel}
                 >
-                <p>
-                <form id="add-book" >
-                <div className="field">
-                    <Input type="text" placeholder="Book name" name="name" onChange={ this.handleOnChange } />
-                </div><br />
-                <div className="field">
-                    <Input type="text" placeholder="Genre" name="genre" onChange={ this.handleOnChange } />
-                </div><br />
-                <div className="field">
-                    <select onChange={ this.handleOnChange } name="authorId" style={{padding: '5px', borderRadius: '3px', borderColor: '#DDD', outline: 'none', width: '100%'}}>
-                        <option disabled>Select an author</option>
-                        {
-                            this.displayAuthors()
-                        }
-                    </select>
-                </div>
-            </form>
-                </p>
+                <span>
+                    <form id="add-book" >
+                        <div className="field">
+                            <Input type="text" placeholder="Book name" name="name" onChange={ this.handleOnChange } />
+                        </div><br />
+                        <div className="field">
+                            <Input type="text" placeholder="Genre" name="genre" onChange={ this.handleOnChange } />
+                        </div><br />
+                        <div className="field">
+                            <select onChange={ this.handleOnChange } name="authorId" style={{padding: '5px', borderRadius: '3px', borderColor: '#DDD', outline: 'none', width: '100%'}}>
+                                <option>Select an author</option>
+                                {
+                                    this.displayAuthors()
+                                }
+                            </select>
+                        </div>
+                    </form>
+                </span><br />
                 {
                     this.state.error ?
                         <Alert message="Please fill the form!" type="error" />
@@ -117,7 +116,7 @@ class AddBook extends Component {
 
                 }
                 </Modal>
-            </div>
+            </span>
             
         )
     }
