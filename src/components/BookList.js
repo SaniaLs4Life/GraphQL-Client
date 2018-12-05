@@ -9,7 +9,8 @@ import {
     Avatar,
     Row,
     Col,
-    Alert
+    Alert,
+    Spin
 } from 'antd';
 
 
@@ -26,7 +27,9 @@ class BookList extends Component {
         const data = this.props.data;
         if(data.loading) {
             return(
-                <div>Loading Books...</div>
+                <div style={{marginTop: '15px'}}>
+                    <Spin />
+                </div>
             )
         } else if(data.books.length === 0){
             return(
