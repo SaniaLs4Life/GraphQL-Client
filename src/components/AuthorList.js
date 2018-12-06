@@ -20,7 +20,6 @@ class AuthorList extends Component {
         });
       }
     deleteAuthor(id) {
-        this.renderAuthors();
         if(id) {            
             this.props.deleteAuthorMutation({
                 variables: {
@@ -48,7 +47,7 @@ class AuthorList extends Component {
         var data = this.props.getAuthorsQuery;
         if(data.loading) {
             return(
-                <div style={{marginTop: '15px'}}>
+                <div style={{marginTop: '15px', textAlign: 'center'}}>
                     <Spin />
                 </div>
             )

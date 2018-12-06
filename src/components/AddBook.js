@@ -47,7 +47,12 @@ class AddBook extends Component {
             return(
                 <option disabled>Loading Authors...</option>
             )
-        } else {
+        } else if(data.authors.length === 0) {
+            return (
+                <option disabled>No authors added</option>
+            )
+        }
+        else {
             return data.authors.map(author => {
                 return (
                     <option key={author.id} value={author.id}>{author.name}</option>

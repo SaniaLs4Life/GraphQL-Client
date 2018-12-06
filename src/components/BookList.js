@@ -10,7 +10,6 @@ import {
     Row,
     Col,
     Alert,
-    Spin,
     Modal
 } from 'antd';
 
@@ -21,7 +20,8 @@ class BookList extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            selected: null
+            selected: null,
+            booksLoading: false
         }
     }
     confirm = (id) => {
@@ -55,7 +55,24 @@ class BookList extends Component {
         if(data.loading) {
             return(
                 <div style={{marginTop: '15px'}}>
-                    <Spin />
+                    <Col span={8}>          
+                        <Card
+                            style={{ width: 500, marginTop: 16, margin: 'auto' }}>               
+                            <Skeleton loading={true} avatar active></Skeleton>                        
+                        </Card>  
+                    </Col>
+                    <Col span={8}>          
+                        <Card
+                            style={{ width: 500, marginTop: 16, margin: 'auto' }}>               
+                            <Skeleton loading={true} avatar active></Skeleton>                        
+                        </Card>  
+                    </Col>
+                    <Col span={8}>          
+                        <Card
+                            style={{ width: 500, marginTop: 16, margin: 'auto' }}>               
+                            <Skeleton loading={true} avatar active></Skeleton>                        
+                        </Card>  
+                    </Col>
                 </div>
             )
         } else if(data.books.length === 0){
@@ -68,22 +85,22 @@ class BookList extends Component {
             )
         }
         else {
-            return data.books.map(book => {                
+            return data.books.map(book => {            
                 return (
                         <Col span={8} key={book.id} style={{marginTop: '15px'}}>
-                            <Card
-                                style={{ width: 500, marginTop: 16, margin: 'auto' }}
-                                actions={[<Button icon="book" type="primary" onClick={(e) => this.setState({ selected: book.id })} >Show Detail</Button>]}
-                                >
-                                <Button type="danger" icon="close" size="small" shape="circle" style={{position: 'absolute', right: '5px', top:'5px'}} onClick={ () => this.confirm(book.id) } />
-                                <Skeleton loading={false} avatar active>
-                                        <Meta
-                                        avatar={<Avatar src="https://cdn4.iconfinder.com/data/icons/basic-17/80/22_BO_open_book-512.png" />}
-                                        title={'Book: ' + book.name}
-                                        description={book.author.name + ' ' + book.author.age} 
-                                        />
-                                </Skeleton>
-                            </Card>
+                                <Card
+                                    style={{ width: 500, marginTop: 16, margin: 'auto' }}
+                                    actions={[<Button icon="book" type="primary" onClick={(e) => this.setState({ selected: book.id })} >Show Detail</Button>]}
+                                    >
+                                    
+                                    <Button type="danger" icon="close" size="small" shape="circle" style={{position: 'absolute', right: '5px', top:'5px'}} onClick={ () => this.confirm(book.id) } />
+                                    
+                                            <Meta
+                                            avatar={<Avatar src="https://cdn4.iconfinder.com/data/icons/basic-17/80/22_BO_open_book-512.png" />}
+                                            title={'Book: ' + book.name}
+                                            description={book.author.name + ' ' + book.author.age} 
+                                            />
+                                </Card>     
                         </Col>
                 )
             })
