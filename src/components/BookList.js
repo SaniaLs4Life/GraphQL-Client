@@ -28,7 +28,7 @@ class BookList extends Component {
         Modal.confirm({
           title: 'Warning!',
           onOk: () => this.deleteBook(id),
-          content: 'Do you want to delete the book',
+          content: 'Do you want to delete the book?',
           okText: 'Yes',
           cancelText: 'No',
         });
