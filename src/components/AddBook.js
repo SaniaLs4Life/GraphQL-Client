@@ -19,6 +19,8 @@ class AddBook extends Component {
         this.setState({
             [e.target.name]: e.target.value
         })
+        
+        console.log(this.state.authorId)
     }
     showModal = () => {
         this.setState({
@@ -54,7 +56,7 @@ class AddBook extends Component {
         }
     }
     submitForm() {
-        if(this.state.name && this.state.genre && this.state.authorId) {
+        if(this.state.name && this.state.genre && this.state.authorId && this.state.authorId !== 'select') {
             this.props.addBookMutation({
                 variables: {
                     name: this.state.name,
@@ -100,7 +102,7 @@ class AddBook extends Component {
                         </div><br />
                         <div className="field">
                             <select onChange={ this.handleOnChange } name="authorId" style={{padding: '5px', borderRadius: '3px', borderColor: '#DDD', outline: 'none', width: '100%'}}>
-                                <option>Select an author</option>
+                                <option value='select'>Select an author</option>
                                 {
                                     this.displayAuthors()
                                 }

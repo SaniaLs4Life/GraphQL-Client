@@ -20,6 +20,7 @@ class AuthorList extends Component {
         });
       }
     deleteAuthor(id) {
+        this.renderAuthors();
         if(id) {            
             this.props.deleteAuthorMutation({
                 variables: {
