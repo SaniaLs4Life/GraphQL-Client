@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { graphql, compose } from 'react-apollo'
 import { addAuthorMutation, getAuthorsQuery } from '../queries/queries'
-import { Modal, Button, Input, Alert  } from 'antd'
+import { Modal, Button, Input, Alert } from 'antd'
 
 class AddAuthor extends Component {
     constructor(props) {
@@ -81,7 +81,7 @@ class AddAuthor extends Component {
                             <Input type="text" placeholder="Author name" name="name" onChange={ this.handleOnChange } />
                         </div><br />
                         <div className="field">
-                            <Input type="number" placeholder="Age" name="age" onChange={ this.handleOnChange } />
+                            <Input type="number" min={0} placeholder="Age" name="age" onChange={ this.handleOnChange } />
                         </div>
                     </form>
                 </span><br />
