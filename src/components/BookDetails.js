@@ -9,7 +9,7 @@ class BookDetails extends Component {
         if(book) {
             return (
                 <div>
-                    <Card title="Book Details" bordered={false} style={{ width: 500, margin: 'auto', border: '1px solid #DDD', marginTop: '5px' }}>
+                    <Card title="Book Details" style={{ width: 500, margin: 'auto', border: '1px solid #DDD', marginTop: '5px' }}>
                         <h2><b>Book Name: </b>{book.name}</h2>
                         <p><b>Genre: </b>{book.genre}</p>
                         <p><b>Book Author Name: </b>{book.author.name}</p>

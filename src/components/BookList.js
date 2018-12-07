@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { graphql, compose } from 'react-apollo'
-import { getBooksQuery, deleteBookMutation, getBookQuery } from '../queries/queries'
+import { getBooksQuery, deleteBookMutation } from '../queries/queries'
 import BookDetails from './BookDetails'
 import {
     Skeleton, 
@@ -90,7 +90,7 @@ class BookList extends Component {
                         <Col span={8} key={book.id} style={{marginTop: '15px'}}>
                                 <Card
                                     style={{ width: 500, marginTop: 16, margin: 'auto' }}
-                                    actions={[<Button icon="book" type="primary" onClick={(e) => this.handleSelectBook(book.id) } >Show Detail</Button>]}
+                                    actions={[<Button icon="book" type="primary" onClick={(e) => this.setState({ selected: book.id }) } >Show Detail</Button>]}
                                     >
                                     
                                     <Button type="danger" icon="close" size="small" shape="circle" style={{position: 'absolute', right: '5px', top:'5px'}} onClick={ () => this.confirm(book.id) } />
@@ -105,40 +105,7 @@ class BookList extends Component {
                 )
             })
         }
-    }
-    handleSelectBook = (id) => {
-        this.setState({
-            selected: id
-        })
-        this.showBookDetail();
-    }
-    showBookDetail = () => {
-        const { book } = this.props.data
-        if(book) {
-                    Modal.info({
-                    title: 'Book Details',
-                    content: (
-                        <div>
-                        <h2><b>Book Name: </b>{book.name}</h2>
-                        <p><b>Genre: </b>{book.genre}</p>
-                        <p><b>Book Author Name: </b>{book.author.name}</p>
-                        <h2><b>All books by this author:</b></h2>
-                            {
-                                book.author.book.map(item => {
-                                    return <p key={item.id}><b>Book Name: </b>{item.name}</p>
-                                })
-                            }
-                        </div>
-                    ),
-                    onOk() {},
-                    });
-        } else {
-            return (
-                <Card title="Book Details" bordered={false} style={{ width: 300, margin: 'auto' }}>
-                    <p>No Selected Book...</p>
-                </Card>
-            )
-        }
+    
     }
     
     render() {
@@ -147,8 +114,10 @@ class BookList extends Component {
                 <Row gutter={16}>
                     {
                             this.displayBooks()
-                    }
+                    }                    
                 </Row>
+                
+                <BookDetails bookId={this.state.selected} /> 
             </div>
         )
     }
@@ -156,14 +125,5 @@ class BookList extends Component {
 
 export default compose(
     graphql(getBooksQuery, { name: 'getBooksQuery' }),
-    graphql(deleteBookMutation, { name: 'deleteBookMutation' }),
-    graphql(getBookQuery, {
-        options: (state) => {
-            return {
-                variables: {
-                    id: state.selected
-                }
-            }
-        }
-    })
+    graphql(deleteBookMutation, { name: 'deleteBookMutation' })
 )(BookList)
