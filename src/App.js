@@ -18,8 +18,8 @@ class App extends Component {
   render() {
     return (
       <ApolloProvider client={client}>        
-        <div style={{textAlign: 'center'}}>            
-          <h1>My Reading List</h1>            
+        <div style={{textAlign: 'center', marginTop: '15px'}}>            
+          <h1>My Reading List <br />GraphQL - ReactJS - ExpressJS - MongoDB</h1>            
           <AuthorList />    
           <AddBook />
           <AddAuthor />  

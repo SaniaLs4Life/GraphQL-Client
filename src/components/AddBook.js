@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { graphql, compose } from 'react-apollo'
 import { getAuthorsQuery, addBookMutation, getBooksQuery } from '../queries/queries'
-import { Modal, Button, Input, Alert  } from 'antd'
+import { Modal, Button, Input, Alert, message  } from 'antd'
 
 class AddBook extends Component {
     constructor(props) {
@@ -60,6 +60,13 @@ class AddBook extends Component {
             });
         }
     }
+    success = () => {
+        message.success('Book is added successfully.');
+      };
+      
+    error = () => {
+        message.error('Please fill the form!');
+    };
     submitForm() {
         if(this.state.name && this.state.genre && this.state.authorId && this.state.authorId !== 'select') {
             this.props.addBookMutation({
@@ -74,6 +81,7 @@ class AddBook extends Component {
                     }
                 ]
             });   
+            this.success();
             this.setState({
                 visible: false,
                 error: false   
@@ -82,6 +90,7 @@ class AddBook extends Component {
             this.setState({
                 error: true
             })
+            this.error();
         }
     }
     render() {

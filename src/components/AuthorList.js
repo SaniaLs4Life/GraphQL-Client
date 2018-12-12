@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import { getAuthorsQuery, deleteAuthorMutation } from '../queries/queries'
-import { Button, Modal, Spin, Alert, Avatar } from 'antd';
+import { Button, Modal, Spin, Alert, Avatar, message } from 'antd';
 
 class AuthorList extends Component {
     constructor(props) {
@@ -19,6 +19,13 @@ class AuthorList extends Component {
           cancelText: 'No',
         });
       }
+    success = () => {
+        message.success('Author is added successfully.');
+    };
+      
+    error = () => {
+        message.error('An error occured!');
+    };
     deleteAuthor(id) {
         if(id) {            
             this.props.deleteAuthorMutation({
@@ -30,8 +37,12 @@ class AuthorList extends Component {
                         query: getAuthorsQuery
                     }
                 ]
-            });            
+            });    
+            this.success();        
+        } else {
+            this.error();
         }
+
     }
     handleOpen = () => {
         this.setState({

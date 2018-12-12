@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { graphql, compose } from 'react-apollo'
 import { addAuthorMutation, getAuthorsQuery } from '../queries/queries'
-import { Modal, Button, Input, Alert } from 'antd'
+import { Modal, Button, Input, Alert, message } from 'antd'
 
 class AddAuthor extends Component {
     constructor(props) {
@@ -37,6 +37,13 @@ class AddAuthor extends Component {
     handleOk = (e) => {
         this.submitForm();
     }
+    success = () => {
+        message.success('Author is added successfully.');
+      };
+      
+    error = () => {
+        message.error('Please fill the form!');
+    };
     submitForm() {
         if(this.state.name && this.state.age) {
             const age = parseInt(this.state.age)
@@ -53,6 +60,7 @@ class AddAuthor extends Component {
             }, () => {
                 alert('Error!')
             });
+            this.success();
             this.setState({
                 visible: false,
                 error: false   
@@ -61,6 +69,7 @@ class AddAuthor extends Component {
             this.setState({
                 error: true
             })
+            this.error();
         }
     }
     render() {

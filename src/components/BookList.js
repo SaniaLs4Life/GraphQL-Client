@@ -10,7 +10,8 @@ import {
     Row,
     Col,
     Alert,
-    Modal
+    Modal,
+    message
 } from 'antd';
 
 
@@ -48,8 +49,18 @@ class BookList extends Component {
             this.setState({
                 selected: null
             })
+            this.success();
+        } else {
+            this.error();
         }
     }
+    success = () => {
+        message.success('Book is deleted successfully.');
+      };
+      
+    error = () => {
+        message.error('An error occured!');
+    };
     displayBooks = () => {
         const data = this.props.getBooksQuery;
         if(data.loading) {
