@@ -34,7 +34,7 @@ class BookList extends Component {
           cancelText: 'No',
         });
       }
-    deleteBook(id) {
+    deleteBook = (id) => {
         if(id) {
             this.props.deleteBookMutation({
                 variables: {
@@ -88,7 +88,7 @@ class BookList extends Component {
             )
         } else if(data.books.length === 0){
             return(
-                <Alert style={{width:'10%', margin: 'auto', marginTop: '15px'}}
+                <Alert style={{width:'20%', margin: 'auto', marginTop: '15px'}}
                     message="Info"
                     description="No added books"
                     type="error"

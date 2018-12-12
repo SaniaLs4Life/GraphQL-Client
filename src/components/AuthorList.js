@@ -25,7 +25,7 @@ class AuthorList extends Component {
     error = () => {
         message.error('An error occured!');
     };
-    deleteAuthor(id) {
+    deleteAuthor = (id) => {
         if(id) {            
             this.props.deleteAuthorMutation({
                 variables: {
@@ -38,6 +38,7 @@ class AuthorList extends Component {
                 ]
             });          
         } else {
+            this.error();
         }
 
     }
@@ -82,7 +83,7 @@ class AuthorList extends Component {
     }
     render() {
         return (
-            <span style={{display: 'inline-block', marginRight: '15px'}}>
+            <div style={{display: 'inline-block', marginRight: '15px'}}>
                 <Button type="primary" onClick={this.handleOpen} icon="team">Author List</Button>
                 <Modal
                 title="Author List"
@@ -94,7 +95,7 @@ class AuthorList extends Component {
                         this.renderAuthors()
                     }
                 </Modal>
-            </span>
+            </div>
         )
     }
 }
