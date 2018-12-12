@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import { getAuthorsQuery, deleteAuthorMutation } from '../queries/queries'
-import { Button, Modal, Spin, Alert, Avatar, message } from 'antd';
+import { Button, Modal, Spin, Alert, Avatar, message, Popconfirm } from 'antd';
 
 class AuthorList extends Component {
     constructor(props) {
@@ -9,18 +9,17 @@ class AuthorList extends Component {
         this.state = {
             visible: false
         }
-    }    
-    confirm = (id) => {
-        Modal.confirm({
-          title: 'Warning!',
-          onOk: () => this.deleteAuthor(id),
-          content: 'Do you want to delete the author?',
-          okText: 'Yes',
-          cancelText: 'No',
-        });
+    }  
+      confirm = (id) => {
+        this.deleteAuthor(id);
+        this.success();
+      }
+      
+      cancel = (e) => {
+        console.log(e);
       }
     success = () => {
-        message.success('Author is added successfully.');
+        message.success('Author is deleted successfully.');
     };
       
     error = () => {
@@ -37,10 +36,8 @@ class AuthorList extends Component {
                         query: getAuthorsQuery
                     }
                 ]
-            });    
-            this.success();        
+            });          
         } else {
-            this.error();
         }
 
     }
@@ -75,7 +72,9 @@ class AuthorList extends Component {
                     <p key={author.id}>
                         <Avatar>{author.name[0]}</Avatar>{' '}
                         <b>{author.name}</b> Age: <b>{author.age}</b>
-                        <Button type="danger" icon="close" size="small" shape="circle" style={{float: 'right'}}  onClick={ () => this.confirm(author.id) } />
+                        <Popconfirm title="Are you sure delete this author?" onConfirm={ () => this.confirm(author.id) }>
+                            <Button type="danger" icon="close" size="small" shape="circle" style={{float: 'right'}}  />
+                        </Popconfirm>
                     </p>
                 )
             })
