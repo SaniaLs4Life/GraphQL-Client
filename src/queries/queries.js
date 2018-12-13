@@ -9,6 +9,17 @@ const getAuthorsQuery = gql`
         }
 }`
 
+const getAllUsers = gql`
+{
+    allUsers{
+        id
+        fullname
+        username
+        password
+    }
+}
+`
+
 const getBooksQuery = gql`
 {
         books{
@@ -38,6 +49,16 @@ const deleteBookMutation = gql`
         }
     }
 `
+const addUser = gql`
+    mutation($fullname: String!, $username: String!, $password: String!) {
+        addUser(fullname: $fullname, username: $username, password: $password) {
+            id
+            fullname
+            username
+            password
+        }
+    }
+`
 
 const addAuthorMutation = gql`
     mutation($name: String!, $age: Int!) {
@@ -54,6 +75,17 @@ const deleteAuthorMutation = gql`
             id
         }
     }
+`
+
+const loginMutation = gql`
+    mutation($username: String!, $password: String!) {
+        login(username: $username, password: $password) {
+            id
+            fullname
+            username
+            password
+        }
+    } 
 `
 
 const getBookQuery = gql`
@@ -74,5 +106,27 @@ const getBookQuery = gql`
         }
     }
 `
+const getUserQuery = gql`
+    query($username: String!, $password: String!) {
+        getUser(username: $username, password: $password) {
+            id
+            fullname
+            username
+            password
+        }
+    }
+`
 
-export { getAuthorsQuery, getBooksQuery, addBookMutation, getBookQuery, addAuthorMutation, deleteBookMutation, deleteAuthorMutation }
+export { 
+        getAuthorsQuery, 
+        getBooksQuery, 
+        addBookMutation, 
+        getBookQuery, 
+        addAuthorMutation, 
+        deleteBookMutation, 
+        deleteAuthorMutation, 
+        getUserQuery, 
+        addUser, 
+        getAllUsers ,
+        loginMutation
+}

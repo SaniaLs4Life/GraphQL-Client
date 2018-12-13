@@ -2,12 +2,11 @@ import React, { Component } from 'react'
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
 
-import BookList from './components/BookList'
-import AddBook from './components/AddBook'
-import AddAuthor from './components/AddAuthor'
-import AuthorList from './components/AuthorList'
-
-import './components/Main.css'
+import Navbar from './components/Navbar';
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
+import Dashboard from './components/Dashboard';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
 const client = new ApolloClient({
@@ -17,13 +16,18 @@ const client = new ApolloClient({
 class App extends Component {
   render() {
     return (
-      <ApolloProvider client={client}>        
-        <div style={{textAlign: 'center', marginTop: '15px'}}>            
-          <h1>My Reading List <br />GraphQL - ReactJS - ExpressJS - MongoDB</h1>            
-          <AuthorList />    
-          <AddBook />
-          <AddAuthor />  
-          <BookList />   
+      <ApolloProvider client={client}>      
+        <div style={{textAlign: 'center'}}>     
+        <Router>
+          <div>
+          <Navbar />                       
+          <Switch>
+            <Route exact path="/signin" component={SignIn} />
+            <Route path="/signup" component={SignUp} />
+            <Route path="/dashboard" component={Dashboard} />
+          </Switch>
+          </div>
+        </Router>                
         </div>
       </ApolloProvider>
     )
